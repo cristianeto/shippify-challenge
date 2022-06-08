@@ -47,8 +47,10 @@ export function Index() {
         </Title>
         <SelectedDriver
           data={drivers}
-          value={driverId}
+          label="Driver"
           handleChangeValue={handleChangeSelected}
+          helperText="Please select a driver"
+          value={driverId}
         />
         {vehicles.length > 0 && <VechicleTable data={vehicles} />}
       </div>

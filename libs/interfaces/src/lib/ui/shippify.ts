@@ -24,3 +24,11 @@ export interface IDriver {
   id: string;
   companyId: string;
 }
+
+export interface ISelectedDriver {
+  data: IDriver[];
+  label: string;
+  handleChangeValue: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  helperText: string;
+  value: string;
+}

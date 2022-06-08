@@ -1,17 +1,23 @@
-import { IDriver } from '@core/interfaces';
+import { IDriver, ISelectedDriver } from '@core/interfaces';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 
-const SelectedDriver = ({ data: drivers, value, handleChangeValue }) => {
+const SelectedDriver: React.FC<ISelectedDriver> = ({
+  data: drivers,
+  label,
+  handleChangeValue,
+  helperText,
+  value,
+}) => {
   return (
     <TextField
       id="outlined-select-currency"
       select
       size="small"
-      label="Driver"
+      label={label}
       value={value}
       onChange={handleChangeValue}
-      helperText="Please select a driver"
+      helperText={helperText}
     >
       {drivers.map((driver: IDriver) => (
         <MenuItem key={driver.id} value={driver.id}>
