@@ -32,3 +32,14 @@ export interface ISelectedDriver {
   helperText: string;
   value: string;
 }
+
+export interface IVehicleForm {
+  onClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  open: boolean;
+}
+
+export interface IModal {
+  children: React.ReactNode;
+  onClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  open: boolean;
+}

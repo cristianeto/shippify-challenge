@@ -15,7 +15,6 @@ const VehicleTable: React.FC<IVehicleTable> = ({ data: items }) => {
           <TableRow>
             <TableCell>Capacity</TableCell>
             <TableCell align="right">Creation date</TableCell>
-            <TableCell align="right">Driver</TableCell>
             <TableCell align="right">Model</TableCell>
             <TableCell align="right">Plate</TableCell>
           </TableRow>
@@ -32,7 +31,6 @@ const VehicleTable: React.FC<IVehicleTable> = ({ data: items }) => {
               <TableCell align="right">
                 {JSON.stringify(vehicle.creation_date)}
               </TableCell>
-              <TableCell align="right">{vehicle.driverId}</TableCell>
               <TableCell align="right">{vehicle.model}</TableCell>
               <TableCell align="right">{vehicle.plate}</TableCell>
             </TableRow>
