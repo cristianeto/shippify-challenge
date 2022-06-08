@@ -1,5 +1,6 @@
-import { IDriver, IVehicle } from '@core/interfaces';
 import { useEffect, useState } from 'react';
+import { Button, Box } from '@mui/material';
+import { IDriver, IVehicle } from '@core/interfaces';
 import { getDriversByCompany } from '../src/services/driver';
 import { getVehiclesByDriver } from '../src/services/vehicle';
 import { VechicleTable } from '@organisms/*';
@@ -14,10 +15,10 @@ export function Index() {
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [drivers, setDrivers] = useState<IDriver[]>([]);
   const [driverId, setDriverId] = useState<string>('');
-  const [companyId] = useState('4');
+  const [companyId] = useState<string>('1');
 
   const populateVehiclesByDriver = async (driverId: string) => {
-    const res = await getVehiclesByDriver(driverId);
+    const res = await getVehiclesByDriver(companyId, driverId);
     const vehicles = res.data;
     setVehicles(vehicles);
   };
@@ -45,13 +46,20 @@ export function Index() {
             <span> Vehicles by driver </span>
           </h1>
         </Title>
-        <SelectedDriver
-          data={drivers}
-          label="Driver"
-          handleChangeValue={handleChangeSelected}
-          helperText="Please select a driver"
-          value={driverId}
-        />
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          alignItems="flex-start"
+        >
+          <SelectedDriver
+            data={drivers}
+            label="Driver"
+            handleChangeValue={handleChangeSelected}
+            helperText="Please select a driver"
+            value={driverId}
+          />
+          <Button variant="contained">New vehicle</Button>
+        </Box>
         {vehicles.length > 0 && <VechicleTable data={vehicles} />}
       </div>
     </div>
