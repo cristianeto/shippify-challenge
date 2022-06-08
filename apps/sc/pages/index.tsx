@@ -1,17 +1,20 @@
-import styled from '@emotion/styled';
+import { IDriver, IVehicle } from '@core/interfaces';
 import { useEffect, useState } from 'react';
+import { getDriversByCompany } from '../src/services/driver';
 import { getVehiclesByDriver } from '../src/services/vehicle';
-import { IVehicle } from '@core/interfaces';
 import { VechicleTable } from '@organisms/*';
+import SelectedDriver from '../src/components/molecules/SelectedDriver/selectedDriver';
+import styled from '@emotion/styled';
 
-const StyledPage = styled.div`
-  .page {
-  }
+const Title = styled.div`
+  margin-bottom: 2rem;
 `;
 
 export function Index() {
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
-  const [driverId, setDriverId] = useState('8');
+  const [drivers, setDrivers] = useState<IDriver[]>([]);
+  const [driverId, setDriverId] = useState<string>('');
+  const [companyId] = useState('4');
 
   const populateVehiclesByDriver = async (driverId: string) => {
     const res = await getVehiclesByDriver(driverId);
@@ -19,23 +22,37 @@ export function Index() {
     setVehicles(vehicles);
   };
 
+  const populateDriversByCompany = async (companyId: string) => {
+    const res = await getDriversByCompany(companyId);
+    const drivers = res.data;
+    setDrivers(drivers);
+  };
+
   useEffect(() => {
     populateVehiclesByDriver(driverId);
-  }, [driverId]);
+    populateDriversByCompany(companyId);
+  }, [driverId, companyId]);
+
+  const handleChangeSelected = ({ target }) => {
+    setDriverId(target.value);
+  };
 
   return (
-    <StyledPage>
-      <div className="wrapper">
-        <div className="container">
-          <div id="welcome">
-            <h1>
-              <span> Vehículos por conductor </span>
-            </h1>
-          </div>
-          <VechicleTable data={vehicles} />
-        </div>
+    <div className="wrapper">
+      <div className="container">
+        <Title id="welcome">
+          <h1>
+            <span> Vehicles by driver </span>
+          </h1>
+        </Title>
+        <SelectedDriver
+          data={drivers}
+          value={driverId}
+          handleChangeValue={handleChangeSelected}
+        />
+        {vehicles.length > 0 && <VechicleTable data={vehicles} />}
       </div>
-    </StyledPage>
+    </div>
   );
 }
 

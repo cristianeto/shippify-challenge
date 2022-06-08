@@ -11,3 +11,16 @@ export interface IVehicle {
 export interface IVehicleTable {
   data: IVehicle[];
 }
+
+export interface IDriver {
+  city: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  avatar: string;
+  status: string;
+  creation_date: string;
+  id: string;
+  companyId: string;
+}

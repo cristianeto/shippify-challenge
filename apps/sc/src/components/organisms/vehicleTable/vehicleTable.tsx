@@ -13,11 +13,11 @@ const VehicleTable: React.FC<IVehicleTable> = ({ data: items }) => {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Capacidad</TableCell>
-            <TableCell align="right">Fecha creación</TableCell>
-            <TableCell align="right">Conductor</TableCell>
-            <TableCell align="right">Modelo</TableCell>
-            <TableCell align="right">Placa</TableCell>
+            <TableCell>Capacity</TableCell>
+            <TableCell align="right">Creation date</TableCell>
+            <TableCell align="right">Driver</TableCell>
+            <TableCell align="right">Model</TableCell>
+            <TableCell align="right">Plate</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
