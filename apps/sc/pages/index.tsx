@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { getDriversByCompany } from '../src/services/driver';
 import { getVehiclesByDriver } from '../src/services/vehicle';
 import { VechicleTable } from '@organisms/*';
-import SelectedDriver from '../src/components/molecules/SelectedDriver/selectedDriver';
+import SelectedDriver from '../src/components/molecules/selectedDriver/selectedDriver';
 import styled from '@emotion/styled';
 
 const Title = styled.div`
