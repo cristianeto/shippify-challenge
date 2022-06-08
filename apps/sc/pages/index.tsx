@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import { useEffect } from 'react';
-import { getCompanies } from '../services/company';
+import { useEffect, useState } from 'react';
+import { getVehiclesByDriver } from '../src/services/vehicle';
 
 const StyledPage = styled.div`
   .page {
@@ -8,20 +8,16 @@ const StyledPage = styled.div`
 `;
 
 export function Index() {
-  /*
-   * Replace the elements below with your own.
-   *
-   * Note: The corresponding styles are in the ./index.@emotion/styled file.
-   */
+  const [driverId, setDriverId] = useState('8');
 
-  const populateCompanies = async () => {
-    const res = await getCompanies();
+  const populateVehiclesByDriver = async (driverId: string) => {
+    const res = await getVehiclesByDriver(driverId);
     console.log(res.data);
   };
 
   useEffect(() => {
-    populateCompanies();
-  }, []);
+    populateVehiclesByDriver(driverId);
+  }, [driverId]);
 
   return (
     <StyledPage>
