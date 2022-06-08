@@ -7,8 +7,10 @@ describe('Vehicle Table', () => {
     const { baseElement } = render(
       <SelectedDriver
         data={driversData}
-        value="1"
+        label="Driver"
         handleChangeValue={jest.fn()}
+        helperText="Please select a driver"
+        value="1"
       />
     );
     expect(baseElement).toBeTruthy();
