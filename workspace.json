@@ -2,7 +2,7 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "sc": "apps/sc",
+    "shippify": "apps/shippify",
     "sc-e2e": "apps/sc-e2e"
   }
 }

@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { driversData } from '@core/mocks';
-import SelectedDriver from '../selectedDriver/selectedDriver';
+import { SelectedDriver } from '@molecules/*';
 
 describe('Vehicle Table', () => {
   it('should render successfully', () => {

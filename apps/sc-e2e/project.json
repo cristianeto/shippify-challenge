@@ -7,22 +7,28 @@
       "executor": "@nrwl/cypress:cypress",
       "options": {
         "cypressConfig": "apps/sc-e2e/cypress.json",
-        "devServerTarget": "sc:serve:development"
+        "devServerTarget": "shippify:serve:development"
       },
       "configurations": {
         "production": {
-          "devServerTarget": "sc:serve:production"
+          "devServerTarget": "shippify:serve:production"
         }
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/sc-e2e/**/*.{js,ts}"]
+        "lintFilePatterns": [
+          "apps/sc-e2e/**/*.{js,ts}"
+        ]
       }
     }
   },
   "tags": [],
-  "implicitDependencies": ["sc"]
+  "implicitDependencies": [
+    "shippify"
+  ]
 }

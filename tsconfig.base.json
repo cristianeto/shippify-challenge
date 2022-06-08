@@ -10,17 +10,33 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@atoms/*": ["apps/sc/src/components/atoms/index.ts"],
-      "@molecules/*": ["apps/sc/src/components/molecules/index.ts"],
-      "@organisms/*": ["apps/sc/src/components/organisms/index.ts"],
-      "@core/interfaces": ["libs/interfaces/src/index.ts"],
-      "@core/mocks": ["libs/mocks/src/index.ts"]
+      "@atoms/*": [
+        "apps/shippify/src/components/atoms/index.ts"
+      ],
+      "@molecules/*": [
+        "apps/shippify/src/components/molecules/index.ts"
+      ],
+      "@organisms/*": [
+        "apps/shippify/src/components/organisms/index.ts"
+      ],
+      "@core/interfaces": [
+        "libs/interfaces/src/index.ts"
+      ],
+      "@core/mocks": [
+        "libs/mocks/src/index.ts"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }
