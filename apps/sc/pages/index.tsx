@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
-import axios from 'axios';
 import { useEffect } from 'react';
-import { api } from '../constants/api';
+import { getCompanies } from '../services/company';
+
 const StyledPage = styled.div`
   .page {
   }
@@ -14,14 +14,14 @@ export function Index() {
    * Note: The corresponding styles are in the ./index.@emotion/styled file.
    */
 
-  const getCompanies = async () => {
-    const res = await axios.get(`${api.url}/company`);
+  const populateCompanies = async () => {
+    const res = await getCompanies();
     console.log(res.data);
-  }
+  };
 
-  useEffect(()=>{
-    getCompanies();
-  },[])
+  useEffect(() => {
+    populateCompanies();
+  }, []);
 
   return (
     <StyledPage>
