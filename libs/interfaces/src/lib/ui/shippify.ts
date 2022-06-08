@@ -5,7 +5,7 @@ export interface IVehicle {
   model: string;
   type: string;
   capacity: string;
-  creation_date: Date;
+  creation_date: string;
 }
 
 export interface IVehicleTable {

@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@organisms/*": ["apps/sc/src/components/organisms/index.ts"],
-      "@core/interfaces": ["libs/interfaces/src/index.ts"]
+      "@core/interfaces": ["libs/interfaces/src/index.ts"],
+      "@core/mocks": ["libs/mocks/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
