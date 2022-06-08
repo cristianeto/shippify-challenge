@@ -9,9 +9,10 @@
   },
   "private": true,
   "dependencies": {
-    "@emotion/react": "11.9.0",
+    "@emotion/react": "^11.9.0",
     "@emotion/server": "11.4.0",
-    "@emotion/styled": "11.8.1",
+    "@emotion/styled": "^11.8.1",
+    "@mui/material": "^5.8.3",
     "@nrwl/next": "14.2.2",
     "axios": "^0.27.2",
     "core-js": "^3.6.5",

@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
 import { getVehiclesByDriver } from '../src/services/vehicle';
+import { IVehicle } from '@core/interfaces';
+import { VechicleTable } from '@organisms/*';
 
 const StyledPage = styled.div`
   .page {
@@ -8,11 +10,13 @@ const StyledPage = styled.div`
 `;
 
 export function Index() {
+  const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [driverId, setDriverId] = useState('8');
 
   const populateVehiclesByDriver = async (driverId: string) => {
     const res = await getVehiclesByDriver(driverId);
-    console.log(res.data);
+    const vehicles = res.data;
+    setVehicles(vehicles);
   };
 
   useEffect(() => {
@@ -25,10 +29,10 @@ export function Index() {
         <div className="container">
           <div id="welcome">
             <h1>
-              <span> Hello there, </span>
-              Welcome sc 👋
+              <span> Vehículos por conductor </span>
             </h1>
           </div>
+          <VechicleTable data={vehicles} />
         </div>
       </div>
     </StyledPage>

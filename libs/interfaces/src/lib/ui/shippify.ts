@@ -7,3 +7,7 @@ export interface IVehicle {
   capacity: string;
   creation_date: Date;
 }
+
+export interface IVehicleTable {
+  data: IVehicle[];
+}
