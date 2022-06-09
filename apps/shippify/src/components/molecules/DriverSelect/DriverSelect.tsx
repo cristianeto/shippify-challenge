@@ -19,6 +19,9 @@ const DriverSelect: React.FC<ISelectedDriver> = ({
       onChange={handleChangeValue}
       helperText={helperText}
     >
+      <MenuItem key="0" value="0" disabled>
+          Select a driver
+      </MenuItem>
       {drivers.map((driver: IDriver) => (
         <MenuItem key={driver.id} value={driver.id}>
           {driver.first_name} {driver.last_name}
