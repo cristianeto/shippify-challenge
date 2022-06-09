@@ -36,6 +36,7 @@ export interface ISelectedDriver {
 export interface IVehicleForm {
   onClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
   open: boolean;
+  type: string;
 }
 
 export interface IModal {
@@ -44,6 +45,8 @@ export interface IModal {
   open: boolean;
 }
 
-export interface IUseVehicle {
-  driverId: string;
+export interface ICustomTextField {
+  label?: string;
+  size?: 'small' | 'medium';
+  placeholder?: string;
 }

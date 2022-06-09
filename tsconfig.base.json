@@ -32,6 +32,9 @@
       ],
       "@core/mocks": [
         "libs/mocks/src/index.ts"
+      ],
+      "@constants": [
+        "apps/shippify/src/constants/index.ts"
       ]
     }
   },
