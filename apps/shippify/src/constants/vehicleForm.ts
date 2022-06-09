@@ -1,16 +1,17 @@
 const vehicleForm = {
-    titles: {
-        newRegister: "new vehicle",
-        updateRegister: "update vehicle",
-        saveRegister: "save"
-    },
-    labels: {
-        plate: "Plate",
-        model: "Model",
-        type: "Type",
-        capacity: "Capacity",
-        creationDate: "Creation date",
-    }
-}
+  titles: {
+    create: 'new vehicle',
+    update: 'update',
+    deleteVehicle: 'delete',
+    saveRegister: 'save',
+  },
+  labels: {
+    plate: 'Plate',
+    model: 'Model',
+    type: 'Type',
+    capacity: 'Capacity',
+    creationDate: 'Creation date',
+  },
+};
 
 export default vehicleForm;

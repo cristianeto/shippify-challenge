@@ -12,6 +12,7 @@ export interface IVehicle {
 
 export interface IVehicleTable {
   data: IVehicle[];
+  onOpen: (open: string) => void;
 }
 
 export interface IDriver {

@@ -1,10 +1,8 @@
-import { useState } from 'react';
-
 import Form from './Form';
 import { HeaderText } from './VehicleForm.style';
 import { IVehicleForm } from '@core/interfaces';
 import { Modal } from '@molecules/*';
-import { vehicleForm } from '@constants';
+import { vehicleForm as vehicleTexts } from '@constants';
 
 const initialState = {
   plateId: '',
@@ -17,7 +15,7 @@ const initialState = {
 };
 
 const VehicleForm: React.FC<IVehicleForm> = ({ open, onClose, type }) => {
-  const { titles, labels } = vehicleForm;
+  const { titles, labels } = vehicleTexts;
 
   const formProps = {
     defaultForm: initialState,
@@ -29,9 +27,7 @@ const VehicleForm: React.FC<IVehicleForm> = ({ open, onClose, type }) => {
     <div>
       <Modal open={open} onClose={onClose}>
         <HeaderText>
-          {type === titles.newRegister
-            ? titles.newRegister
-            : titles.updateRegister}
+          {type === titles.create ? titles.create : titles.update}
         </HeaderText>
         <Form {...formProps} />
       </Modal>

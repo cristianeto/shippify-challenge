@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 
 import { Button, Box } from '@mui/material';
 
@@ -6,7 +6,7 @@ import { DriverSelect } from '@molecules/*';
 import styled from '@emotion/styled';
 import useDrivers from '../src/hooks/useDrivers';
 import useVehicles from '../src/hooks/useVehicles';
-import vehicleForm from '../src/constants/vehicleForm';
+import { vehicleForm as vehicleTexts } from '@constants';
 import { VechicleForm, VechicleTable } from '@organisms/*';
 import { AppContext } from '../src/context/appContext';
 
@@ -16,12 +16,12 @@ const Title = styled.div`
 
 export function Index() {
   const {
-    titles: { newRegister, updateRegister },
-  } = vehicleForm;
+    titles: { create },
+  } = vehicleTexts;
   const { drivers } = useDrivers();
   const [driverId, setDriverId] = useState<string>('');
   const { vehicles } = useVehicles(driverId);
-  const [type, setType] = useState<string>(newRegister);
+  const [type, setType] = useState<string>(create);
   const [open, setOpen] = useState<boolean>(false);
 
   const driverById = (driverId: string) => {
@@ -34,7 +34,9 @@ export function Index() {
 
   const handleOpen = (type: string) => {
     setOpen(true);
-    setType(newRegister);
+    const driver = driverById(driverId);
+    console.log(driver.first_name + driver.last_name);
+    setType(type);
   };
   const handleClose = () => {
     setOpen(false);
@@ -64,14 +66,16 @@ export function Index() {
             />
             <Button
               variant="contained"
-              onClick={() => handleOpen('new')}
+              onClick={() => handleOpen(create)}
               disabled={driverId !== '' ? false : true}
             >
               New vehicle
             </Button>
           </Box>
           <VechicleForm open={open} onClose={handleClose} type={type} />
-          {vehicles.length > 0 && <VechicleTable data={vehicles} />}
+          {vehicles.length > 0 && (
+            <VechicleTable data={vehicles} onOpen={handleOpen} />
+          )}
         </div>
       </div>
     </AppContext.Provider>
