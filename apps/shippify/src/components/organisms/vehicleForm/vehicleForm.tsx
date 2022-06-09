@@ -17,7 +17,6 @@ const initialState = {
 };
 
 const VehicleForm: React.FC<IVehicleForm> = ({ open, onClose, type }) => {
-  const [defaultForm, setDefaultForm] = useState(initialState);
   const { titles, labels } = vehicleForm;
 
   const formProps = {

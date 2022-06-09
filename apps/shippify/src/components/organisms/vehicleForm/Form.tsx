@@ -3,11 +3,16 @@ import { useFormik } from 'formik';
 import { Button, Grid } from '@mui/material';
 import { TextField } from '@molecules/*';
 import vechicleSchema from './vehicleSchema';
+import { useContext } from 'react';
+import { AppContext } from 'apps/shippify/src/context/appContext';
+import { IVehicle } from '@core/interfaces';
 
 const Form = ({ defaultForm, labels, titles }) => {
-  const doSubmit = () => {
-    console.log('submiting.....');
+  const doSubmit = (values: IVehicle) => {
+    console.log('submiting.....', values);
   };
+
+  const driver = useContext(AppContext);
 
   const formik = useFormik({
     initialValues: {
@@ -16,9 +21,11 @@ const Form = ({ defaultForm, labels, titles }) => {
       model: defaultForm.model,
       type: defaultForm.type,
       capacity: defaultForm.capacity,
+      creation_date: defaultForm.creation_date,
+      driverId: driver?.id,
     },
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: (values: IVehicle) => {
+      doSubmit(values);
     },
     validationSchema: vechicleSchema,
   });

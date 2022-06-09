@@ -7,6 +7,7 @@ const vechicleSchema = yup.object().shape({
   type: yup.string().required('Required'),
   capacity: yup.string().required('Required'),
   creationDate: yup.string(),
+  driverId: yup.string(),
 });
 
 export default vechicleSchema;
