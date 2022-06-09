@@ -1,1 +1,2 @@
-export { default as SelectedDriver } from './selectedDriver/selectedDriver';
+export { default as DriverSelect } from './DriverSelect/DriverSelect';
+export { default as Modal } from './Modal/Modal';

@@ -4,7 +4,7 @@ import { IDriver, IVehicle } from '@core/interfaces';
 import { getDriversByCompany } from '../src/services/driver';
 import { getVehiclesByDriver } from '../src/services/vehicle';
 import { VechicleForm, VechicleTable } from '@organisms/*';
-import { SelectedDriver } from '@molecules/*';
+import { DriverSelect } from '@molecules/*';
 import styled from '@emotion/styled';
 
 const Title = styled.div`
@@ -59,7 +59,7 @@ export function Index() {
           justifyContent="space-between"
           alignItems="flex-start"
         >
-          <SelectedDriver
+          <DriverSelect
             data={drivers}
             label="Driver"
             handleChangeValue={handleChangeSelected}

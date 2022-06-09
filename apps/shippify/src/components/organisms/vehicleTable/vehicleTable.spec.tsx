@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import VehicleTable from './vehicleTable';
+import VehicleTable from './VehicleTable';
 import { vehiclesData } from '@core/mocks';
 
 describe('Vehicle Table', () => {

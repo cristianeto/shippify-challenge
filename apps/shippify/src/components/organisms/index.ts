@@ -1,2 +1,2 @@
-export { default as VechicleTable } from './vehicleTable/vehicleTable';
-export { default as VechicleForm } from './vehicleForm/vehicleForm';
+export { default as VechicleTable } from './VehicleTable/VehicleTable';
+export { default as VechicleForm } from './VehicleForm/VehicleForm';

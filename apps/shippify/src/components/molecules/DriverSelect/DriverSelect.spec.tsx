@@ -1,11 +1,11 @@
 import { render } from '@testing-library/react';
 import { driversData } from '@core/mocks';
-import { SelectedDriver } from '@molecules/*';
+import { DriverSelect } from '@molecules/*';
 
 describe('Vehicle Table', () => {
   it('should render successfully', () => {
     const { baseElement } = render(
-      <SelectedDriver
+      <DriverSelect
         data={driversData}
         label="Driver"
         handleChangeValue={jest.fn()}

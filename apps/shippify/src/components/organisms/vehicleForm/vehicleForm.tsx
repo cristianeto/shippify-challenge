@@ -1,5 +1,5 @@
 import { IVehicleForm } from '@core/interfaces';
-import { Modal } from '@atoms/*';
+import { Modal } from '@molecules/*';
 
 const VehicleForm: React.FC<IVehicleForm> = ({ open, onClose }) => {
   return (

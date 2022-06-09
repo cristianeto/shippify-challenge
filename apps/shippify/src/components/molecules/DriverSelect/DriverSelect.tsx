@@ -2,7 +2,7 @@ import { IDriver, ISelectedDriver } from '@core/interfaces';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 
-const SelectedDriver: React.FC<ISelectedDriver> = ({
+const DriverSelect: React.FC<ISelectedDriver> = ({
   data: drivers,
   label,
   handleChangeValue,
@@ -28,4 +28,4 @@ const SelectedDriver: React.FC<ISelectedDriver> = ({
   );
 };
 
-export default SelectedDriver;
+export default DriverSelect;
