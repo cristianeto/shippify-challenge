@@ -12,7 +12,7 @@ export interface IVehicle {
 
 export interface IVehicleTable {
   data: IVehicle[];
-  onOpen: (open: string) => void;
+  onOpen: (open: string, vehicleId: string) => void;
 }
 
 export interface IDriver {
@@ -37,6 +37,7 @@ export interface ISelectedDriver {
 }
 
 export interface IVehicleForm {
+  initialState: IVehicle;
   onClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
   open: boolean;
   type: string;

@@ -15,6 +15,7 @@ const VehicleTable: React.FC<IVehicleTable> = ({ data: items, onOpen }) => {
   const {
     titles: { update, deleteVehicle },
   } = vehicleTexts;
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -43,7 +44,10 @@ const VehicleTable: React.FC<IVehicleTable> = ({ data: items, onOpen }) => {
               <TableCell align="right">{vehicle.model}</TableCell>
               <TableCell align="right">{vehicle.plate}</TableCell>
               <TableCell align="right">
-                <Button variant="contained" onClick={() => onOpen('update')}>
+                <Button
+                  variant="contained"
+                  onClick={() => onOpen(update, vehicle.id)}
+                >
                   {update}
                 </Button>
               </TableCell>

@@ -9,41 +9,59 @@ import useVehicles from '../src/hooks/useVehicles';
 import { vehicleForm as vehicleTexts } from '@constants';
 import { VechicleForm, VechicleTable } from '@organisms/*';
 import { AppContext } from '../src/context/appContext';
+import { IVehicle } from '@core/interfaces';
 
 const Title = styled.div`
   margin-bottom: 2rem;
 `;
 
+const initialState: IVehicle = {
+  plate: '',
+  model: '',
+  type: '',
+  capacity: '',
+  creation_date: '',
+  id: '',
+  driverId: '',
+};
+
 export function Index() {
   const {
-    titles: { create },
+    titles: { create, update },
   } = vehicleTexts;
-  const { drivers } = useDrivers();
-  const [driverId, setDriverId] = useState<string>('');
-  const { vehicles } = useVehicles(driverId);
+  const { drivers, driverById } = useDrivers();
+  const [selectedDriver, setSelectedDriver] = useState<string>('');
+  const { vehicles, vehicleById } = useVehicles(selectedDriver);
+  const [selectedVehicle, setSelectedVehicle] =
+    useState<IVehicle>(initialState);
   const [type, setType] = useState<string>(create);
   const [open, setOpen] = useState<boolean>(false);
 
-  const driverById = (driverId: string) => {
-    return drivers.find((driver) => driver.id === driverId);
-  };
-
   const handleChangeSelected = ({ target }) => {
-    setDriverId(target.value);
+    setSelectedDriver(target.value);
   };
 
-  const handleOpen = (type: string) => {
+  const handleOpen = (type: string, vehicleId: string = '') => {
     setOpen(true);
-    const driver = driverById(driverId);
-    console.log(driver.first_name + driver.last_name);
+    populateForm(type, vehicleId);
     setType(type);
   };
+
   const handleClose = () => {
     setOpen(false);
   };
 
+  const populateForm = (type: string, vehicleId: string = '') => {
+    if (type === update && vehicleId !== '') {
+      const vehicle = vehicleById(vehicleId);
+      setSelectedVehicle(vehicle);
+    } else {
+      setSelectedVehicle(initialState);
+    }
+  };
+
   return (
-    <AppContext.Provider value={driverById(driverId)}>
+    <AppContext.Provider value={driverById(selectedDriver)}>
       <div className="wrapper">
         <div className="container">
           <Title id="welcome">
@@ -62,17 +80,22 @@ export function Index() {
               label="Driver"
               handleChangeValue={handleChangeSelected}
               helperText="Please select a driver"
-              value={driverId}
+              value={selectedDriver}
             />
             <Button
               variant="contained"
               onClick={() => handleOpen(create)}
-              disabled={driverId !== '' ? false : true}
+              disabled={selectedDriver !== '' ? false : true}
             >
               New vehicle
             </Button>
           </Box>
-          <VechicleForm open={open} onClose={handleClose} type={type} />
+          <VechicleForm
+            open={open}
+            onClose={handleClose}
+            type={type}
+            initialState={selectedVehicle}
+          />
           {vehicles.length > 0 && (
             <VechicleTable data={vehicles} onOpen={handleOpen} />
           )}
