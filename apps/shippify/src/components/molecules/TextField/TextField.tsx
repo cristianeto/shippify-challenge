@@ -1,18 +1,22 @@
 import { ICustomTextField } from '@core/interfaces';
-import { Grid, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 
 const CustomTextField: React.FC<ICustomTextField> = ({
+  error,
   label,
-  size = 'small',
   placeholder,
+  size = 'small',
+  ...props
 }) => {
   return (
     <TextField
-      label={label}
+      error={error}
       fullWidth
+      label={label}
+      placeholder={placeholder}
       size={size}
       variant="outlined"
-      placeholder={placeholder}
+      {...props}
     />
   );
 };

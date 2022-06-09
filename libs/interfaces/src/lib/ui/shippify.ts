@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface IVehicle {
   id: string;
   driverId: string;
@@ -46,7 +48,10 @@ export interface IModal {
 }
 
 export interface ICustomTextField {
+  error?: boolean;
+  helperText?: string;
   label?: string;
-  size?: 'small' | 'medium';
   placeholder?: string;
+  size?: 'small' | 'medium';
+  value?: string;
 }
