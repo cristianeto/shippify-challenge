@@ -1,6 +1,7 @@
-import { IVehicle } from '@core/interfaces';
-import { getVehiclesByDriverId } from '../services/vehicle';
 import { useCallback, useEffect, useState } from 'react';
+
+import { IVehicle } from '@core/interfaces';
+import { getVehiclesByDriverId } from '../../services/vehicle';
 
 const useVehicles = (driverId: string) => {
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);

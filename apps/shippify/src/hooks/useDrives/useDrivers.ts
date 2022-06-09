@@ -1,6 +1,6 @@
 import { IDriver } from '@core/interfaces';
 import { useEffect, useState } from 'react';
-import { getDriversByCompanyId } from '../services/driver';
+import { getDriversByCompanyId } from '../../services/driver';
 
 const useDrivers = () => {
   const [drivers, setDrivers] = useState<IDriver[]>([]);

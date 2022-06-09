@@ -10,36 +10,22 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": [
-      "es2017",
-      "dom"
-    ],
+    "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@atoms/*": [
-        "apps/shippify/src/components/atoms/index.ts"
-      ],
-      "@molecules/*": [
-        "apps/shippify/src/components/molecules/index.ts"
-      ],
-      "@organisms/*": [
-        "apps/shippify/src/components/organisms/index.ts"
-      ],
-      "@core/interfaces": [
-        "libs/interfaces/src/index.ts"
-      ],
-      "@core/mocks": [
-        "libs/mocks/src/index.ts"
-      ],
-      "@constants": [
-        "apps/shippify/src/constants/index.ts"
-      ]
+      "@core/interfaces": ["libs/interfaces/src/index.ts"],
+      "@core/mocks": ["libs/mocks/src/index.ts"],
+      "@atoms/*": ["apps/shippify/src/components/atoms/index.ts"],
+      "@constants": ["apps/shippify/src/constants/index.ts"],
+      "@hooks": ["apps/shippify/src/hooks/index.ts"],
+      "@hooks/*": ["apps/shippify/src/hooks/*"],
+      "@molecules/*": ["apps/shippify/src/components/molecules/index.ts"],
+      "@organisms/*": ["apps/shippify/src/components/organisms/index.ts"],
+      "@screens": ["apps/shippify/src/screens/index.ts"],
+      "@screens/*": ["apps/shippify/src/screens/*"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }

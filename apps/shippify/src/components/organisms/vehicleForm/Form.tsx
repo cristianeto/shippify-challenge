@@ -1,15 +1,25 @@
-import { useFormik } from 'formik';
+import { useContext } from 'react';
 
 import { Button, Grid } from '@mui/material';
-import { TextField } from '@molecules/*';
-import vechicleSchema from './vehicleSchema';
-import { useContext } from 'react';
+import { useFormik } from 'formik';
+
 import { AppContext } from 'apps/shippify/src/context/appContext';
 import { IVehicle } from '@core/interfaces';
+import { TextField } from '@molecules/*';
+import { vehicleForm as vehiclesTexts } from '@constants';
+import vechicleSchema from './vehicleSchema';
 
-const Form = ({ defaultForm, labels, titles }) => {
+const Form = ({ defaultForm, labels, titles, type }) => {
+  const {
+    titles: { create, update },
+  } = vehiclesTexts;
   const doSubmit = (values: IVehicle) => {
-    console.log('submiting.....', values);
+    console.log(type);
+    if (type === update) {
+      console.log('updating...', values);
+    } else if (type === create) {
+      console.log('creating...', values);
+    }
   };
 
   const driver = useContext(AppContext);

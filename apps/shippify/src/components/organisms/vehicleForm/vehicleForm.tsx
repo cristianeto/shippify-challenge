@@ -16,6 +16,7 @@ const VehicleForm: React.FC<IVehicleForm> = ({
     defaultForm: initialState,
     labels,
     titles,
+    type,
   };
 
   return (
