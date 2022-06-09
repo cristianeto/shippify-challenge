@@ -43,3 +43,7 @@ export interface IModal {
   onClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
   open: boolean;
 }
+
+export interface IUseVehicle {
+  driverId: string;
+}

@@ -1,39 +1,22 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Box } from '@mui/material';
-import { IDriver, IVehicle } from '@core/interfaces';
-import { getDriversByCompanyId } from '../src/services/driver';
+import { IVehicle } from '@core/interfaces';
 import { getVehiclesByDriverId } from '../src/services/vehicle';
 import { VechicleForm, VechicleTable } from '@organisms/*';
 import { DriverSelect } from '@molecules/*';
 import styled from '@emotion/styled';
+import useDrivers from '../src/hooks/useDrivers';
+import useVehicles from '../src/hooks/useVehicles';
 
 const Title = styled.div`
   margin-bottom: 2rem;
 `;
 
 export function Index() {
-  const [vehicles, setVehicles] = useState<IVehicle[]>([]);
-  const [drivers, setDrivers] = useState<IDriver[]>([]);
+  const {drivers} = useDrivers();
   const [driverId, setDriverId] = useState<string>("");
+  const {vehicles} = useVehicles(driverId);
   const [open, setOpen] = useState<boolean>(false);
-
-  const populateVehicles = async (driverId: string) => {
-    const res = await getVehiclesByDriverId(driverId);
-    const vehicles = res.data;
-    setVehicles(vehicles);
-  };
-
-  const populateDrivers = async () => {
-    const res = await getDriversByCompanyId("1");
-    const drivers = res.data;
-    setDrivers(drivers);
-  };
-
-  useEffect(() => {
-    populateDrivers();
-    driverId !== "" && populateVehicles(driverId);
-  }, [driverId]);
-  
 
   const handleChangeSelected = ({ target }) => {
     setDriverId(target.value);
