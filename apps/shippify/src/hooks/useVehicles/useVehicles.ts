@@ -16,8 +16,8 @@ export const initialState: IVehicle = {
 
 const useVehicles = (
   driverId: string,
-  setShowModal: any,
-  setSelectedVehicle: any
+  setShowModal: (value: boolean) => void,
+  setSelectedVehicle: (value: IVehicle) => void
 ) => {
   const {
     titles: { create, update },

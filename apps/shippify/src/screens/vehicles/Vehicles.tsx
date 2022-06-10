@@ -4,13 +4,13 @@ import { Button, Box } from '@mui/material';
 import styled from '@emotion/styled';
 
 import { AppContext } from '../../context/appContext';
+import { DeleteModal } from '@organisms/*';
 import { DriverSelect } from '@molecules/*';
 import { IVehicle } from '@core/interfaces';
+import { initialState } from '@hooks/useVehicles/useVehicles';
 import { vehicleForm as vehicleTexts } from '@constants';
 import { VechicleForm, VechicleTable } from '@organisms/*';
 import { useDrivers, useVehicles } from '@hooks';
-import { DeleteModal } from '@organisms/*';
-import { initialState } from '@hooks/useVehicles/useVehicles';
 
 const Title = styled.div`
   margin-bottom: 2rem;
