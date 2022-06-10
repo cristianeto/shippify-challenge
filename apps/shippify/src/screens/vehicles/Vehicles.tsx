@@ -10,88 +10,53 @@ import { vehicleForm as vehicleTexts } from '@constants';
 import { VechicleForm, VechicleTable } from '@organisms/*';
 import { useDrivers, useVehicles } from '@hooks';
 import { DeleteModal } from '@organisms/*';
-import { saveVehicle } from '../../services/vehicle';
+import { initialState } from '@hooks/useVehicles/useVehicles';
 
 const Title = styled.div`
   margin-bottom: 2rem;
 `;
 
-const initialState: IVehicle = {
-  plate: '',
-  model: '',
-  type: '',
-  capacity: '',
-  creation_date: '',
-  id: '',
-  driverId: '',
-};
-
 const Vehicles: React.FC = () => {
   const {
-    titles: { create, update },
+    titles: { create },
   } = vehicleTexts;
-  const { drivers, driverById } = useDrivers();
+
   const [selectedDriver, setSelectedDriver] = useState<string>('');
-  const { doDelete, doCreate, doUpdate, setVehicles, vehicles, vehicleById } =
-    useVehicles(selectedDriver);
+  const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
+  const [showFormModal, setShowModal] = useState<boolean>(false);
   const [selectedVehicle, setSelectedVehicle] =
     useState<IVehicle>(initialState);
-  const [type, setType] = useState<string>('');
-  const [open, setOpen] = useState<boolean>(false);
-  const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
+
+  const { drivers, driverById } = useDrivers();
+  const { vehicles, getVehicleById, doSubmit, populateForm, formType } =
+    useVehicles(selectedDriver, setShowModal, setSelectedVehicle);
 
   const handleChangeSelected = ({ target }) => {
     setSelectedDriver(target.value);
   };
 
-  const handleOpen = (newType: string, vehicleId = '') => {
-    setOpen(true);
-    setType(newType);
+  const handleOpenVechicleFormModal = (newType: string, vehicleId = '') => {
+    setShowModal(true);
     populateForm(newType, vehicleId);
   };
 
-  const handleClose = () => {
-    setOpen(false);
-    setType('');
+  const handleCloseVechicleFormModal = () => {
+    setShowModal(false);
   };
 
-  const populateForm = (type: string, vehicleId = '') => {
-    if (type === update && vehicleId !== '') {
-      const vehicle = vehicleById(vehicleId);
-      setSelectedVehicle(vehicle);
-    } else {
-      setSelectedVehicle(initialState);
-    }
-  };
-
-  const handleOpenDeleteModal = (vehicleId = '') => {
-    setOpenDeleteModal(true);
-    const vehicle = vehicleById(vehicleId);
+  const handleOpenDialogModal = (vehicleId = '') => {
+    setShowDeleteModal(true);
+    const vehicle = getVehicleById(vehicleId);
     setSelectedVehicle(vehicle);
   };
 
-  const handleCloseDeleteModal = () => {
-    setOpenDeleteModal(false);
-  };
-
-  const doSubmit = async (vehicle: IVehicle) => {
-    const originalVehicles = [...vehicles];
-    try {
-      const { data: newVehicle } = await saveVehicle(vehicle);
-      if (!vehicle.id) {
-        doCreate(newVehicle);
-      } else {
-        doUpdate(vehicle);
-      }
-    } catch (error) {
-      setVehicles(originalVehicles);
-    }
-    setOpen(false);
+  const handleCloseDialogModal = () => {
+    setShowDeleteModal(false);
   };
 
   const handleDelete = (vehicleId: string) => {
-    doDelete(vehicleId);
-    setOpenDeleteModal(false);
+    //doDelete(vehicleId);
+    setShowDeleteModal(false);
   };
 
   return (
@@ -117,28 +82,28 @@ const Vehicles: React.FC = () => {
             />
             <Button
               variant="contained"
-              onClick={() => handleOpen(create)}
+              onClick={() => handleOpenVechicleFormModal(create)}
               disabled={selectedDriver !== '' ? false : true}
             >
               {create}
             </Button>
           </Box>
           <VechicleForm
-            open={open}
-            onClose={handleClose}
-            type={type}
+            open={showFormModal}
+            onClose={handleCloseVechicleFormModal}
+            type={formType}
             initialState={selectedVehicle}
             onSubmit={doSubmit}
           />
           <VechicleTable
             data={vehicles}
-            onOpen={handleOpen}
-            onOpenDeleteModal={handleOpenDeleteModal}
+            onOpen={handleOpenVechicleFormModal}
+            onOpenDeleteModal={handleOpenDialogModal}
           />
           <DeleteModal
             option={selectedVehicle}
-            open={openDeleteModal}
-            onClose={handleCloseDeleteModal}
+            open={showDeleteModal}
+            onClose={handleCloseDialogModal}
             onDelete={handleDelete}
           />
         </div>

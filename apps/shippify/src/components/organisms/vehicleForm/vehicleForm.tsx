@@ -3,6 +3,7 @@ import { HeaderText } from './VehicleForm.style';
 import { IVehicleForm } from '@core/interfaces';
 import { Modal } from '@molecules/*';
 import { vehicleForm as vehicleTexts } from '@constants';
+import { useVehicles } from '@hooks';
 
 const VehicleForm: React.FC<IVehicleForm> = ({
   onSubmit,
@@ -18,7 +19,6 @@ const VehicleForm: React.FC<IVehicleForm> = ({
     onSubmit,
     labels,
     titles,
-    type,
   };
 
   const { create, updateRegister } = titles;
