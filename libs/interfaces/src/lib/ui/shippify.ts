@@ -13,6 +13,7 @@ export interface IVehicle {
 export interface IVehicleTable {
   data: IVehicle[];
   onOpen: (open: string, vehicleId: string) => void;
+  onOpenDeleteModal: (idToDelete: string) => void;
 }
 
 export interface IDriver {
@@ -56,4 +57,11 @@ export interface ICustomTextField {
   placeholder?: string;
   size?: 'small' | 'medium';
   value?: string;
+}
+
+export interface IDeleteModal {
+  onDelete: (idToDelete: string) => void;
+  option: IVehicle;
+  onClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  open: boolean;
 }

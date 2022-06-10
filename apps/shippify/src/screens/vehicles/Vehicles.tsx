@@ -9,6 +9,7 @@ import { IVehicle } from '@core/interfaces';
 import { vehicleForm as vehicleTexts } from '@constants';
 import { VechicleForm, VechicleTable } from '@organisms/*';
 import { useDrivers, useVehicles } from '@hooks';
+import DeleteModal from '../../components/organisms/DeleteModal/DeleteModal';
 
 const Title = styled.div`
   margin-bottom: 2rem;
@@ -24,24 +25,24 @@ const initialState: IVehicle = {
   driverId: '',
 };
 
-export function Vehicles() {
+const Vehicles: React.FC = () => {
   const {
     titles: { create, update },
   } = vehicleTexts;
   const { drivers, driverById } = useDrivers();
   const [selectedDriver, setSelectedDriver] = useState<string>('');
-  const { vehicles, vehicleById } = useVehicles(selectedDriver);
+  const { setVehicles, vehicles, vehicleById } = useVehicles(selectedDriver);
   const [selectedVehicle, setSelectedVehicle] =
     useState<IVehicle>(initialState);
   const [type, setType] = useState<string>('');
   const [open, setOpen] = useState<boolean>(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
 
   const handleChangeSelected = ({ target }) => {
     setSelectedDriver(target.value);
   };
 
   const handleOpen = (newType: string, vehicleId = '') => {
-    console.log(newType);
     setOpen(true);
     setType(newType);
     populateForm(newType, vehicleId);
@@ -61,6 +62,25 @@ export function Vehicles() {
     }
   };
 
+  const handleOpenDeleteModal = (vehicleId = '') => {
+    setOpenDeleteModal(true);
+    const vehicle = vehicleById(vehicleId);
+    setSelectedVehicle(vehicle);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setOpenDeleteModal(false);
+  };
+
+  const deleteVehicle = (vehicleId: string) => {
+    console.log('deleting');
+    const vehiclesFiltered = vehicles.filter(
+      (vehicle) => vehicle.id !== vehicleId
+    );
+    setVehicles(vehiclesFiltered);
+    setOpenDeleteModal(false);
+  };
+
   return (
     <AppContext.Provider value={driverById(selectedDriver)}>
       <div className="wrapper">
@@ -74,7 +94,6 @@ export function Vehicles() {
             display="flex"
             justifyContent="space-between"
             alignItems="flex-start"
-            width="100%"
           >
             <DriverSelect
               data={drivers}
@@ -97,11 +116,21 @@ export function Vehicles() {
             type={type}
             initialState={selectedVehicle}
           />
-          <VechicleTable data={vehicles} onOpen={handleOpen} />
+          <VechicleTable
+            data={vehicles}
+            onOpen={handleOpen}
+            onOpenDeleteModal={handleOpenDeleteModal}
+          />
+          <DeleteModal
+            option={selectedVehicle}
+            open={openDeleteModal}
+            onClose={handleCloseDeleteModal}
+            onDelete={deleteVehicle}
+          />
         </div>
       </div>
     </AppContext.Provider>
   );
-}
+};
 
 export default Vehicles;

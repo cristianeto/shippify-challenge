@@ -19,12 +19,12 @@ const VehicleForm: React.FC<IVehicleForm> = ({
     type,
   };
 
+  const { create, updateRegister } = titles;
+
   return (
     <div>
       <Modal open={open} onClose={onClose}>
-        <HeaderText>
-          {type === titles.create ? titles.create : titles.update}
-        </HeaderText>
+        <HeaderText>{type === create ? create : updateRegister}</HeaderText>
         <Form {...formProps} />
       </Modal>
     </div>

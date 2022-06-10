@@ -20,7 +20,7 @@ const useVehicles = (driverId: string) => {
     driverId !== '' && populateVehicles(driverId);
   }, [driverId, populateVehicles]);
 
-  return { vehicles, vehicleById };
+  return { setVehicles, vehicles, vehicleById };
 };
 
 export default useVehicles;

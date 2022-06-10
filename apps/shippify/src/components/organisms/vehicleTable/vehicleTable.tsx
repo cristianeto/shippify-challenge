@@ -11,9 +11,13 @@ import { IVehicle, IVehicleTable } from '@core/interfaces';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { vehicleForm as vehicleTexts } from '@constants';
 
-const VehicleTable: React.FC<IVehicleTable> = ({ data: items, onOpen }) => {
+const VehicleTable: React.FC<IVehicleTable> = ({
+  data: items,
+  onOpen,
+  onOpenDeleteModal,
+}) => {
   const {
-    titles: { update, deleteVehicle },
+    titles: { update, deleteRegister },
   } = vehicleTexts;
 
   return (
@@ -26,8 +30,7 @@ const VehicleTable: React.FC<IVehicleTable> = ({ data: items, onOpen }) => {
               <TableCell align="right">Creation date</TableCell>
               <TableCell align="right">Model</TableCell>
               <TableCell align="right">Plate</TableCell>
-              <TableCell align="right">Modificar</TableCell>
-              <TableCell align="right">Eliminar</TableCell>
+              <TableCell align="center">Options</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -44,16 +47,25 @@ const VehicleTable: React.FC<IVehicleTable> = ({ data: items, onOpen }) => {
                 </TableCell>
                 <TableCell align="right">{vehicle.model}</TableCell>
                 <TableCell align="right">{vehicle.plate}</TableCell>
-                <TableCell align="right">
+                <TableCell
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                  }}
+                >
                   <Button
                     variant="contained"
                     onClick={() => onOpen(update, vehicle.id)}
                   >
                     {update}
                   </Button>
-                </TableCell>
-                <TableCell align="right">
-                  <Button variant="contained">{deleteVehicle}</Button>
+                  <Button
+                    variant="contained"
+                    onClick={() => onOpenDeleteModal(vehicle.id)}
+                    color="secondary"
+                  >
+                    {deleteRegister}
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}

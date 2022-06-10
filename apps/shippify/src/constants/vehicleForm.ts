@@ -2,7 +2,8 @@ const vehicleForm = {
   titles: {
     create: 'new vehicle',
     update: 'update',
-    deleteVehicle: 'delete',
+    updateRegister: 'update Vehicle',
+    deleteRegister: 'delete',
     saveRegister: 'save',
   },
   labels: {
