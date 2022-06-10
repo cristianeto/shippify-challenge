@@ -38,6 +38,7 @@ export interface ISelectedDriver {
 }
 
 export interface IVehicleForm {
+  doSubmit: (vehicle: IVehicle) => void;
   initialState: IVehicle;
   onClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
   open: boolean;

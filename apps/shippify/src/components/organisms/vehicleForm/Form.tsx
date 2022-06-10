@@ -9,17 +9,19 @@ import { TextField } from '@molecules/*';
 import { vehicleForm as vehiclesTexts } from '@constants';
 import vechicleSchema from './vehicleSchema';
 
-const Form = ({ defaultForm, labels, titles, type }) => {
+const Form = ({ defaultForm, doSubmit, labels, titles, type }) => {
   const {
     titles: { create, update },
   } = vehiclesTexts;
-  const doSubmit = (values: IVehicle) => {
-    console.log(type);
-    if (type === update) {
-      console.log('updating...', values);
-    } else if (type === create) {
-      console.log('creating...', values);
-    }
+
+  const saveForm = (values: IVehicle) => {
+    // console.log(type);
+    // if (type === update) {
+    //   console.log('updating...', values);
+    // } else if (type === create) {
+    //   console.log('creating...', values);
+    // }
+    doSubmit(values);
   };
 
   const driver = useContext(AppContext);
@@ -35,7 +37,7 @@ const Form = ({ defaultForm, labels, titles, type }) => {
       driverId: driver?.id,
     },
     onSubmit: (values: IVehicle) => {
-      doSubmit(values);
+      saveForm(values);
     },
     validationSchema: vechicleSchema,
   });

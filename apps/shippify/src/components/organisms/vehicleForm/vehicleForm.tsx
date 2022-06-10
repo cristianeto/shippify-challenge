@@ -1,10 +1,11 @@
 import Form from './Form';
 import { HeaderText } from './VehicleForm.style';
-import { IVehicle, IVehicleForm } from '@core/interfaces';
+import { IVehicleForm } from '@core/interfaces';
 import { Modal } from '@molecules/*';
 import { vehicleForm as vehicleTexts } from '@constants';
 
 const VehicleForm: React.FC<IVehicleForm> = ({
+  doSubmit,
   open,
   onClose,
   type,
@@ -14,6 +15,7 @@ const VehicleForm: React.FC<IVehicleForm> = ({
 
   const formProps = {
     defaultForm: initialState,
+    doSubmit,
     labels,
     titles,
     type,

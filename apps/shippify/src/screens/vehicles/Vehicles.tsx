@@ -9,7 +9,8 @@ import { IVehicle } from '@core/interfaces';
 import { vehicleForm as vehicleTexts } from '@constants';
 import { VechicleForm, VechicleTable } from '@organisms/*';
 import { useDrivers, useVehicles } from '@hooks';
-import DeleteModal from '../../components/organisms/DeleteModal/DeleteModal';
+import { DeleteModal } from '@organisms/*';
+import { saveVehicle } from '../../services/vehicle';
 
 const Title = styled.div`
   margin-bottom: 2rem;
@@ -31,7 +32,8 @@ const Vehicles: React.FC = () => {
   } = vehicleTexts;
   const { drivers, driverById } = useDrivers();
   const [selectedDriver, setSelectedDriver] = useState<string>('');
-  const { setVehicles, vehicles, vehicleById } = useVehicles(selectedDriver);
+  const { doDelete, doSave, doUpdate, setVehicles, vehicles, vehicleById } =
+    useVehicles(selectedDriver);
   const [selectedVehicle, setSelectedVehicle] =
     useState<IVehicle>(initialState);
   const [type, setType] = useState<string>('');
@@ -72,12 +74,23 @@ const Vehicles: React.FC = () => {
     setOpenDeleteModal(false);
   };
 
-  const deleteVehicle = (vehicleId: string) => {
-    console.log('deleting');
-    const vehiclesFiltered = vehicles.filter(
-      (vehicle) => vehicle.id !== vehicleId
-    );
-    setVehicles(vehiclesFiltered);
+  const doSubmit = async (vehicle: IVehicle) => {
+    const originalVehicles = [...vehicles];
+    try {
+      const { data: vehicleData } = await saveVehicle(vehicle);
+      if (!vehicle.id) {
+        doSave(vehicleData, originalVehicles);
+      } else {
+        doUpdate(vehicle, vehicles);
+      }
+    } catch (error) {
+      setVehicles(originalVehicles);
+    }
+    setOpen(false);
+  };
+
+  const handleDelete = (vehicleId: string) => {
+    doDelete(vehicleId);
     setOpenDeleteModal(false);
   };
 
@@ -115,6 +128,7 @@ const Vehicles: React.FC = () => {
             onClose={handleClose}
             type={type}
             initialState={selectedVehicle}
+            doSubmit={doSubmit}
           />
           <VechicleTable
             data={vehicles}
@@ -125,7 +139,7 @@ const Vehicles: React.FC = () => {
             option={selectedVehicle}
             open={openDeleteModal}
             onClose={handleCloseDeleteModal}
-            onDelete={deleteVehicle}
+            onDelete={handleDelete}
           />
         </div>
       </div>

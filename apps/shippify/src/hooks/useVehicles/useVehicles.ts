@@ -16,11 +16,29 @@ const useVehicles = (driverId: string) => {
     return vehicles.find((v) => v.id === vehicleId);
   };
 
+  const doSave = (data: IVehicle, vehicles: IVehicle[]) => {
+    const newVehicles = [data, ...vehicles];
+    setVehicles(newVehicles);
+  };
+
+  const doUpdate = (vehicle: IVehicle, vehicles: IVehicle[]) => {
+    const indexVehicle = vehicles.findIndex((v) => v.id === vehicle.id);
+    vehicles[indexVehicle] = vehicle;
+    setVehicles(vehicles);
+  };
+
+  const doDelete = (vehicleId: string) => {
+    const vehiclesFiltered = vehicles.filter(
+      (vehicle) => vehicle.id !== vehicleId
+    );
+    setVehicles(vehiclesFiltered);
+  };
+
   useEffect(() => {
     driverId !== '' && populateVehicles(driverId);
   }, [driverId, populateVehicles]);
 
-  return { setVehicles, vehicles, vehicleById };
+  return { doDelete, doSave, doUpdate, setVehicles, vehicles, vehicleById };
 };
 
 export default useVehicles;
