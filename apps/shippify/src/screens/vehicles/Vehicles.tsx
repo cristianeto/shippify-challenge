@@ -77,11 +77,11 @@ const Vehicles: React.FC = () => {
   const doSubmit = async (vehicle: IVehicle) => {
     const originalVehicles = [...vehicles];
     try {
-      const { data: vehicleData } = await saveVehicle(vehicle);
+      const { data: newVehicle } = await saveVehicle(vehicle);
       if (!vehicle.id) {
-        doCreate(vehicleData, originalVehicles);
+        doCreate(newVehicle);
       } else {
-        doUpdate(vehicle, vehicles);
+        doUpdate(vehicle);
       }
     } catch (error) {
       setVehicles(originalVehicles);
@@ -128,7 +128,7 @@ const Vehicles: React.FC = () => {
             onClose={handleClose}
             type={type}
             initialState={selectedVehicle}
-            doSubmit={doSubmit}
+            onSubmit={doSubmit}
           />
           <VechicleTable
             data={vehicles}

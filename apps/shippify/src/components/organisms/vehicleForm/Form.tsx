@@ -4,24 +4,18 @@ import { Button, Grid } from '@mui/material';
 import { useFormik } from 'formik';
 
 import { AppContext } from 'apps/shippify/src/context/appContext';
-import { IVehicle } from '@core/interfaces';
+import { IForm, IVehicle } from '@core/interfaces';
 import { TextField } from '@molecules/*';
 import { vehicleForm as vehiclesTexts } from '@constants';
 import vechicleSchema from './vehicleSchema';
 
-const Form = ({ defaultForm, doSubmit, labels, titles, type }) => {
+const Form: React.FC<IForm> = ({ defaultForm, onSubmit, labels }) => {
   const {
-    titles: { create, update },
+    titles: { saveRegister },
   } = vehiclesTexts;
 
   const saveForm = (values: IVehicle) => {
-    // console.log(type);
-    // if (type === update) {
-    //   console.log('updating...', values);
-    // } else if (type === create) {
-    //   console.log('creating...', values);
-    // }
-    doSubmit(values);
+    onSubmit(values);
   };
 
   const driver = useContext(AppContext);
@@ -74,7 +68,7 @@ const Form = ({ defaultForm, doSubmit, labels, titles, type }) => {
         </Grid>
         <Grid item xs={12}>
           <Button variant="contained" fullWidth type="submit">
-            {titles.saveRegister}
+            {saveRegister}
           </Button>
         </Grid>
       </Grid>

@@ -16,21 +16,19 @@ const useVehicles = (driverId: string) => {
     return vehicles.find((v) => v.id === vehicleId);
   };
 
-  const doCreate = (data: IVehicle, vehicles: IVehicle[]) => {
-    const newVehicles = [data, ...vehicles];
+  const doCreate = (vechicle: IVehicle) => {
+    const newVehicles = [vechicle, ...vehicles];
     setVehicles(newVehicles);
   };
 
-  const doUpdate = (vehicle: IVehicle, vehicles: IVehicle[]) => {
+  const doUpdate = (vehicle: IVehicle) => {
     const indexVehicle = vehicles.findIndex((v) => v.id === vehicle.id);
     vehicles[indexVehicle] = vehicle;
     setVehicles(vehicles);
   };
 
   const doDelete = (vehicleId: string) => {
-    const vehiclesFiltered = vehicles.filter(
-      (vehicle) => vehicle.id !== vehicleId
-    );
+    const vehiclesFiltered = vehicles.filter((v) => v.id !== vehicleId);
     setVehicles(vehiclesFiltered);
   };
 

@@ -38,13 +38,24 @@ export interface ISelectedDriver {
 }
 
 export interface IVehicleForm {
-  doSubmit: (vehicle: IVehicle) => void;
+  onSubmit: (vehicle: IVehicle) => void;
   initialState: IVehicle;
   onClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
   open: boolean;
   type: string;
 }
 
+export interface IForm {
+  defaultForm: IVehicle;
+  onSubmit: (values: IVehicle) => void;
+  labels: {
+    plate: string;
+    model: string;
+    type: string;
+    capacity: string;
+    creationDate: string;
+  };
+}
 export interface IModal {
   children: React.ReactNode;
   onClose: (event: React.MouseEvent<HTMLButtonElement>) => void;

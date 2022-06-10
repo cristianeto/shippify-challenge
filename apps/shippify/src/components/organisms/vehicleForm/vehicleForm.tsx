@@ -5,7 +5,7 @@ import { Modal } from '@molecules/*';
 import { vehicleForm as vehicleTexts } from '@constants';
 
 const VehicleForm: React.FC<IVehicleForm> = ({
-  doSubmit,
+  onSubmit,
   open,
   onClose,
   type,
@@ -15,7 +15,7 @@ const VehicleForm: React.FC<IVehicleForm> = ({
 
   const formProps = {
     defaultForm: initialState,
-    doSubmit,
+    onSubmit,
     labels,
     titles,
     type,
