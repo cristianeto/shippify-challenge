@@ -32,7 +32,7 @@ const Vehicles: React.FC = () => {
   } = vehicleTexts;
   const { drivers, driverById } = useDrivers();
   const [selectedDriver, setSelectedDriver] = useState<string>('');
-  const { doDelete, doSave, doUpdate, setVehicles, vehicles, vehicleById } =
+  const { doDelete, doCreate, doUpdate, setVehicles, vehicles, vehicleById } =
     useVehicles(selectedDriver);
   const [selectedVehicle, setSelectedVehicle] =
     useState<IVehicle>(initialState);
@@ -79,7 +79,7 @@ const Vehicles: React.FC = () => {
     try {
       const { data: vehicleData } = await saveVehicle(vehicle);
       if (!vehicle.id) {
-        doSave(vehicleData, originalVehicles);
+        doCreate(vehicleData, originalVehicles);
       } else {
         doUpdate(vehicle, vehicles);
       }

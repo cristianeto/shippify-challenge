@@ -24,3 +24,9 @@ export function saveVehicle(vehicle: IVehicle) {
     vehicle
   );
 }
+
+export function deleteVehicle(vehicle: IVehicle) {
+  return http.delete(
+    `${apiCompany}/1/${apiDriver}/${vehicle.driverId}/${apiVehicle}/${vehicle.id}`
+  );
+}

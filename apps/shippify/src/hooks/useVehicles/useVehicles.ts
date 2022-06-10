@@ -16,7 +16,7 @@ const useVehicles = (driverId: string) => {
     return vehicles.find((v) => v.id === vehicleId);
   };
 
-  const doSave = (data: IVehicle, vehicles: IVehicle[]) => {
+  const doCreate = (data: IVehicle, vehicles: IVehicle[]) => {
     const newVehicles = [data, ...vehicles];
     setVehicles(newVehicles);
   };
@@ -38,7 +38,7 @@ const useVehicles = (driverId: string) => {
     driverId !== '' && populateVehicles(driverId);
   }, [driverId, populateVehicles]);
 
-  return { doDelete, doSave, doUpdate, setVehicles, vehicles, vehicleById };
+  return { doDelete, doCreate, doUpdate, setVehicles, vehicles, vehicleById };
 };
 
 export default useVehicles;
