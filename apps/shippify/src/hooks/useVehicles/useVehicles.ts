@@ -1,7 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import { IVehicle } from '@core/interfaces';
-import { getVehiclesByDriverId, saveVehicle } from '../../services/vehicle';
+import {
+  deleteVehicle,
+  getVehiclesByDriverId,
+  saveVehicle,
+} from '../../services/vehicle';
 import vehicleTexts from '../../constants/vehicleForm';
 
 export const initialState: IVehicle = {
@@ -47,9 +51,16 @@ const useVehicles = (
     setVehicles(vehicles);
   };
 
-  const doDelete = (vehicleId: string) => {
-    const vehiclesFiltered = vehicles.filter((v) => v.id !== vehicleId);
-    setVehicles(vehiclesFiltered);
+  const doDelete = async (vehicleId: string) => {
+    const originalVehicles = [...vehicles];
+    try {
+      const vehicle = getVehicleById(vehicleId);
+      await deleteVehicle(vehicle);
+      const vehiclesFiltered = vehicles.filter((v) => v.id !== vehicleId);
+      setVehicles(vehiclesFiltered);
+    } catch (error) {
+      setVehicles(originalVehicles);
+    }
   };
 
   const doSubmit = async (vehicle: IVehicle) => {

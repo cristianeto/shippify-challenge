@@ -27,9 +27,16 @@ const Vehicles: React.FC = () => {
   const [selectedVehicle, setSelectedVehicle] =
     useState<IVehicle>(initialState);
 
+  /** hooks */
   const { drivers, driverById } = useDrivers();
-  const { vehicles, getVehicleById, doSubmit, populateForm, formType } =
-    useVehicles(selectedDriver, setShowModal, setSelectedVehicle);
+  const {
+    vehicles,
+    getVehicleById,
+    doSubmit,
+    doDelete,
+    populateForm,
+    formType,
+  } = useVehicles(selectedDriver, setShowModal, setSelectedVehicle);
 
   const handleChangeSelected = ({ target }) => {
     setSelectedDriver(target.value);
@@ -55,7 +62,7 @@ const Vehicles: React.FC = () => {
   };
 
   const handleDelete = (vehicleId: string) => {
-    //doDelete(vehicleId);
+    doDelete(vehicleId);
     setShowDeleteModal(false);
   };
 
